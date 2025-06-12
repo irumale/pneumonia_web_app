@@ -1,0 +1,8 @@
+Flask
+gunicorn
+tensorflow
+pillow
+numpy
+protobuf==3.20.3
+flask
+pillow
