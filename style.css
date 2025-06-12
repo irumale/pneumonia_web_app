@@ -1,0 +1,27 @@
+/* style.css */
+body {
+  font-family: Arial;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  margin: auto;
+  width: 90%;
+  max-width: 500px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+#error {
+  color: red;
+}
