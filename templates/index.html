@@ -1,9 +1,9 @@
-<!-- index.html -->
-<!DOCTYPE html>
+<!-- templates/index.html -->
+
 <html>
 <head>
   <title>Pneumonia Detector</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <div class="container">
@@ -13,6 +13,6 @@
     <button onclick="handleImage()">Next</button>
   </div>
 
-  <script src="script.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
