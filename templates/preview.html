@@ -1,17 +1,21 @@
 <!-- templates/preview.html -->
-
+<!DOCTYPE html>
 <html>
 <head>
   <title>Preview Image</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <div class="container">
     <h1>Preview Your Image</h1>
-    <img id="previewImg" src="" alt="Uploaded Image">
-    <button onclick="predict()">Predict</button>
-  </div>
-
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% if image_file %}
+      <img id="previewImg" src="{{ url_for('static', filename='uploads/' + image_file) }}" alt="Uploaded Image">
+      <form method="POST" action="/predict" enctype="multipart/form-data">
+        <input type="hidden" name="image" value="{{ image_file }}">
+        <button type="submit">Predict</button>
+      </form>
+    {% else %}
+      <p>No image to preview.</p>
+    {% endif %}
 </body>
 </html>

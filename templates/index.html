@@ -1,15 +1,16 @@
-<!-- index.html -->
+<!-- templates/index.html -->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Pneumonia Detector</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <div class="container">
     <h1>Pneumonia Detection</h1>
-    <form action="/preview" method="POST" enctype="multipart/form-data">
+    <form id="uploadForm" method="POST" enctype="multipart/form-data" action="/preview">
       <input type="file" name="image" accept="image/*" required>
+      <p id="error"></p>
       <button type="submit">Next</button>
     </form>
   </div>

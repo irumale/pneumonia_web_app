@@ -38,10 +38,7 @@ def home():
 @app.route('/preview', methods=['GET', 'POST'])
 def preview():
     if request.method == 'POST':
-        if 'image' not in request.files:
-            return render_template('preview.html', image_file=None)
-
-        file = request.files['image']
+        file = request.files.get('image')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -50,14 +47,22 @@ def preview():
     return render_template('preview.html', image_file=None)
 
 
+
 @app.route('/result')
 def result():
     return render_template('result.html', result=None, image_file=None)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    if 'image' not in request.files:
-        return render_template('result.html', result='No image uploaded', image_file=None)
+    image_name = request.form.get('image')
+
+    if image_name:
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
+        if os.path.exists(filepath):
+            result = predict_image(filepath)
+            return render_template('result.html', result=result, image_file=image_name)
+    return render_template('result.html', result='No image found', image_file=None)
+
 
     file = request.files['image']
     if file.filename == '':
