@@ -34,9 +34,21 @@ def predict_image(image_path):
 def home():
     return render_template('index.html')
 
-@app.route('/preview')
+
+@app.route('/preview', methods=['GET', 'POST'])
 def preview():
-    return render_template('preview.html')
+    if request.method == 'POST':
+        if 'image' not in request.files:
+            return render_template('preview.html', image_file=None)
+
+        file = request.files['image']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+            return render_template('preview.html', image_file=filename)
+    return render_template('preview.html', image_file=None)
+
 
 @app.route('/result')
 def result():
